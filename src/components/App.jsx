@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-import { fetchPhoto, fetchError } from './api/api';
+import { fetchPhoto, fetchError } from '../api/api';
 import { AppContainer, Title, Container } from './App.styled';
 
 import { Searchbar } from './Searchbar/Searchbar';
@@ -122,6 +122,7 @@ export class App extends Component {
   onClickReloading = () => {
     this.setState(({ page }) => ({
       page: page + 1,
+      btnLoadMore: false,
     }));
   };
 
@@ -133,9 +134,10 @@ export class App extends Component {
       <Container>
         <Title>Image finder</Title>
         <Searchbar onSubmitSearch={this.onSubmitSearch} />
-        {isLoading && <Loader />}
+
         <AppContainer>
-          <ImageGallery photos={photos} onClickImage={this.onClickOpenModal} />;
+          <ImageGallery photos={photos} onClickImage={this.onClickOpenModal} />
+          {isLoading && <Loader />}
         </AppContainer>
         {photos.length !== 0 && btnLoadMore && (
           <Button onClickReloading={this.onClickReloading} />
