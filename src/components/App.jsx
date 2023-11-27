@@ -9,7 +9,6 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
-import { searchImages } from 'pixabay-api';
 
 const perPage = 12;
 
@@ -84,16 +83,7 @@ export class App extends Component {
       });
   };
 
-  onSubmitSearch = searchImages => {
-    // evt.preventDefault();
-    // const form = evt.currentTarget;
-    // const searchImage = form.search.value.trim().toLowerCase();
-
-    if (searchImage === '') {
-      Notify.info('Enter your request, please!', styleNotify);
-      return;
-    }
-
+  onSubmitSearch = searchImage => {
     if (searchImage === this.state.search) {
       Notify.info('Enter new request, please!', styleNotify);
       return;

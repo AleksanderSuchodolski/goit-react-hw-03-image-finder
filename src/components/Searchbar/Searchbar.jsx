@@ -5,17 +5,23 @@ import {
   SearchFormInput,
 } from './Searchbar.styled';
 import { HiOutlineSearch } from 'react-icons/hi';
+import { Notify } from 'notiflix';
 
 export const Searchbar = ({ onSubmitSearch }) => {
-  handleSubmit = evt => {
+  const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.currentTarget;
     const searchImage = form.search.value.trim().toLowerCase();
+    if (searchImage === '') {
+      Notify.info('Enter your request, please!');
+      return;
+    }
+    onSubmitSearch(searchImage);
   };
 
   return (
     <SearchbarContainer>
-      <SearchForm onSubmit={onSubmitSearch}>
+      <SearchForm onSubmit={handleSubmit}>
         <SearchFormButton>
           <HiOutlineSearch size="30" />
         </SearchFormButton>
